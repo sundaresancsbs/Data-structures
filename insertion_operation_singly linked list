@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+void insert_at_end(struct node **head,int data){
+    if(*head==NULL){
+            struct node *nn=malloc(sizeof(struct node));
+            nn->data=data;
+            nn->next=NULL;
+            *head=nn;
+    }
+    else{
+        struct node *temp=*head;
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        struct node *nn=malloc(sizeof(struct node));
+            nn->data=data;
+            nn->next=NULL;
+        temp->next=nn;
+    }
+}
+void insert_at_beg(struct node **head,int data){
+    struct node *nn=malloc(sizeof(struct node));
+    nn->data=data;
+    nn->next=NULL;
+    if(*head==NULL){
+        *head=nn;
+    }
+    else{
+        struct  node *temp=*head;
+        nn->next=temp;
+        temp=nn;
+    }
+}
+void insert_at_posn(struct node **head,int data,int posn){
+    struct node *temp=*head;
+    int count=1;
+    struct node *nn=malloc(sizeof(struct node));
+    nn->data=data;
+    nn->next=NULL;
+    while(count<posn-1){
+        temp=temp->next;
+        count++;
+    }
+    nn->next=temp->next;
+    temp->next=nn;
+}
+int main(){
+    struct node *head=NULL;
+    insert_at_end(&head,10);
+    insert_at_end(&head,20);
+    insert_at_end(&head,30);
+    insert_at_beg(&head,40);
+    insert_at_posn(&head,78,3);
+    struct node *temp=head;
+    while(temp!=NULL){
+        printf("%d\n",temp->data);
+        temp=temp->next;
+    }
+    return 0;
+}
